@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Cat Wiki — a simple reference for Discord usernames, account age and collector badges." />
+  <title>Cat Wiki</title>
+  <link rel="icon" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="sidebar">
+      <a class="brand" href="#top" aria-label="Cat Wiki home">
+        <span class="brand-mark">C</span>
+        <span class="brand-copy">
+          <strong>Cat</strong>
+          <small>wiki</small>
+        </span>
+      </a>
+
+      <nav class="side-nav" aria-label="Wiki sections">
+        <button class="nav-item active" data-tab="market" type="button">Market</button>
+        <button class="nav-item" data-tab="glossary" type="button">Terms</button>
+        <button class="nav-item" data-tab="badges" type="button">Badges</button>
+        <button class="nav-item" data-tab="community" type="button">Discord</button>
+      </nav>
+
+      <div class="side-bottom">
+        <button id="copySummary" class="small-btn" type="button">Copy prices</button>
+      </div>
+    </header>
+
+    <main class="main" id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <div>
+            <h1>Discord market reference</h1>
+            <p>Short usernames, old accounts and collector badges. Quick ranges without pretending every account has one exact price.</p>
+          </div>
+          <div class="hero-note">
+            <span class="status"><i></i> Reference only</span>
+            <span>Prices shown in USD</span>
+          </div>
+        </div>
+
+        <div class="quick-ranges" aria-label="Quick price ranges">
+          <button data-jump-filter="3L"><span>3L</span><strong>$300–$900</strong></button>
+          <button data-jump-filter="3C"><span>3C</span><strong>$220–$500</strong></button>
+          <button data-jump-filter="3N"><span>3N</span><strong>$900–$2.1k</strong></button>
+          <button data-jump-filter="4L"><span>4L</span><strong>$20–$180</strong></button>
+          <button data-jump-filter="4C"><span>4C</span><strong>$35–$150</strong></button>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <section class="panel active" data-panel="market">
+          <div class="panel-head">
+            <div>
+              <h2>Price guide</h2>
+              <p class="panel-subtitle">Browse by format, then open an entry for the details.</p>
+            </div>
+            <span class="count"><b id="resultCount">14</b> entries</span>
+          </div>
+
+          <div class="tool-row">
+            <label class="searchbox">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></svg>
+              <input id="search" type="search" autocomplete="off" placeholder="Search usernames, formats or badges" />
+            </label>
+            <div id="filters" class="filters" aria-label="Filter price guide"></div>
+          </div>
+
+          <div class="market-head" aria-hidden="true">
+            <span>Type</span><span>Example</span><span>What it means</span><span>Range</span>
+          </div>
+          <div class="market-grid" id="marketList" aria-live="polite"></div>
+
+          <div class="info-callout">
+            <strong>About these prices</strong>
+            <p>Pattern quality, real words, creation year and badge combinations can move a listing well outside the base range. Use this as a reference, not a final appraisal.</p>
+          </div>
+        </section>
+
+        <section class="panel" data-panel="glossary">
+          <div class="panel-head">
+            <div>
+              <h2>Terms</h2>
+              <p class="panel-subtitle">The shorthand you will see around the username market.</p>
+            </div>
+            <span class="count">8 terms</span>
+          </div>
+
+          <div class="term-grid">
+            <article class="term-card"><span>3L</span><h3>Three letters</h3><p>Exactly three alphabetic letters. Pronounceable, balanced combinations usually sell better than random consonant stacks.</p><div><code>nuv</code><code>zea</code><code>kiv</code></div></article>
+            <article class="term-card"><span>4L</span><h3>Four letters</h3><p>Exactly four letters. Word-like or brandable combinations can move far above the generic floor.</p><div><code>kero</code><code>vexa</code><code>nori</code></div></article>
+            <article class="term-card"><span>3C</span><h3>Three characters</h3><p>Three total characters, letters or numbers. Pattern quality and readability decide whether it feels premium.</p><div><code>q7x</code><code>v2v</code><code>8qx</code></div></article>
+            <article class="term-card"><span>4C</span><h3>Four characters</h3><p>Four total characters. Symmetry, repetition and clean number placement can create a noticeable premium.</p><div><code>k4r7</code><code>7v7x</code><code>x2qx</code></div></article>
+            <article class="term-card"><span>3N</span><h3>Three numbers</h3><p>Exactly three digits. Repeats, references and memorable numeric patterns can exceed the normal range.</p><div><code>404</code><code>777</code><code>808</code></div></article>
+            <article class="term-card"><span>SEMI</span><h3>Near-premium format</h3><p>A username close to a desirable format without being perfectly pure. The smaller the imperfection, the stronger the result.</p><div><code>8v8</code><code>0rio</code><code>luma7</code></div></article>
+            <article class="term-card"><span>NAME</span><h3>Meaning</h3><p>A real recognizable word or expression. Word quality, spelling, language reach and brandability matter more than length alone.</p><div><code>velvet</code><code>lunar</code><code>orage</code></div></article>
+            <article class="term-card"><span>REP</span><h3>Repeater</h3><p>A mirrored or repeated structure. Strong repeaters look intentional immediately rather than coincidentally patterned.</p><div><code>777</code><code>7v7</code><code>x7x7</code></div></article>
+          </div>
+
+          <div class="estimator">
+            <div class="estimator-copy">
+              <h3>Quick estimate</h3>
+              <p>Pick a base format and one profile trait. This is only a rough window.</p>
+            </div>
+            <div class="estimator-form">
+              <label>Base<select id="calcBase"><option value="4l">4L</option><option value="4c">4C</option><option value="3c">3C</option><option value="3l">3L</option><option value="semi3n">Semi 3N</option><option value="3n">3N</option></select></label>
+              <label>Trait<select id="calcBadge"><option value="none">None</option><option value="old">2015 / 2016 creation</option><option value="early">Early Supporter</option></select></label>
+            </div>
+            <div class="estimate-box"><span>Estimated range</span><strong id="calcValue">$20–$180</strong><small id="calcNote">Base 4L range before quality adjustments.</small></div>
+          </div>
+        </section>
+
+        <section class="panel" data-panel="badges">
+          <div class="panel-head badge-panel-head">
+            <div>
+              <h2>Badges</h2>
+              <p class="panel-subtitle">Collector badges and profile traits that can affect demand.</p>
+            </div>
+            <span class="count">11 badges</span>
+          </div>
+
+          <div class="badge-note">
+            Badge value depends heavily on the rest of the profile. A rare badge on a strong old account is not the same market as the badge alone.
+          </div>
+          <div class="badge-grid" id="badgeList"></div>
+        </section>
+
+        <section class="panel" data-panel="community">
+          <div class="panel-head">
+            <div>
+              <h2>Discord</h2>
+              <p class="panel-subtitle">Live community widget and server information.</p>
+            </div>
+            <span class="count"><b id="discordPresence">Live</b></span>
+          </div>
+
+          <div class="community-layout">
+            <div class="discord-widget-card">
+              <div class="discord-widget-top">
+                <span class="live-dot"></span>
+                <div><strong id="discordServerName">Discord community</strong><small id="discordServerMeta">Loading live widget…</small></div>
+              </div>
+              <div class="discord-frame-wrap">
+                <iframe src="https://discord.com/widget?id=1550254966889783326&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" loading="lazy" title="Cat Discord server widget"></iframe>
+              </div>
+            </div>
+
+            <aside class="community-info">
+              <h3>Cat community</h3>
+              <p>Presence data is loaded from Discord's public widget endpoint when available.</p>
+              <div class="community-stat"><span>Guild ID</span><strong>1550254966889783326</strong></div>
+              <div class="community-stat"><span>Online now</span><strong id="discordOnline">—</strong></div>
+              <div class="community-stat"><span>Visible members</span><strong id="discordVisibleMembers">—</strong></div>
+              <a class="community-json" href="https://discord.com/api/guilds/1550254966889783326/widget.json" target="_blank" rel="noreferrer">Open widget data</a>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <footer>
+        <span>Cat Wiki</span>
+        <span>Market reference · USD</span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="detailModal">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close" type="button" aria-label="Close">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
