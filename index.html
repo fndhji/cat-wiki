@@ -25,6 +25,7 @@
         <button class="nav-item" data-tab="glossary" type="button">Terms</button>
         <button class="nav-item" data-tab="badges" type="button">Badges</button>
         <button class="nav-item" data-tab="community" type="button">Discord</button>
+        <button class="nav-item" data-tab="bio" type="button">Bio</button>
       </nav>
 
       <div class="side-bottom">
@@ -131,6 +132,21 @@
           <div class="badge-grid" id="badgeList"></div>
         </section>
 
+
+        <section class="panel" data-panel="bio">
+          <div class="panel-head">
+            <div>
+              <h2>Bio</h2>
+              <p class="panel-subtitle">Private creator access, public profile pages.</p>
+            </div>
+            <a id="bioManageLink" class="small-btn bio-manage-link" href="/admin">Creator login</a>
+          </div>
+          <div class="bio-hub-note">
+            <strong>Cat Bio</strong>
+            <p>Profiles are published by the Cat owner. Discord linking only verifies the profile identity; it never grants editing access.</p>
+          </div>
+          <div id="bioHubList" class="bio-hub-grid" aria-live="polite"></div>
+        </section>
         <section class="panel" data-panel="community">
           <div class="panel-head">
             <div>
@@ -178,5 +194,6 @@
   </dialog>
 
   <script src="app.js"></script>
+  <script src="bio-index.js"></script>
 </body>
 </html>

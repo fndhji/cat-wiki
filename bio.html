@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050505"><meta name="description" content="Cat Bio"><title>Cat Bio</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/bio.css"></head>
+<body>
+  <div id="bg" class="bio-bg"></div>
+  <div id="shade" class="bio-shade"></div>
+  <main id="bioRoot" class="bio-page" hidden>
+    <section class="profile-card">
+      <div class="profile-head">
+        <div id="avatar" class="profile-avatar"></div>
+        <div class="profile-title"><div class="name-row"><h1 id="displayName"></h1><div id="badges" class="profile-badges"></div></div><div id="handle" class="handle"></div><p id="headline"></p></div>
+      </div>
+      <p id="bioText" class="profile-bio"></p>
+      <div id="discordCard" class="presence-card" hidden></div>
+      <div id="spotifyCard" class="spotify-card" hidden></div>
+      <div id="links" class="profile-links"></div>
+      <footer class="profile-foot"><span id="views">0 views</span><span id="location"></span><a href="/">Cat Wiki</a></footer>
+    </section>
+  </main>
+  <button id="musicButton" class="music-button" type="button" hidden>♫</button>
+  <audio id="bgMusic" loop preload="metadata"></audio>
+  <div id="bioError" class="bio-error" hidden>Bio unavailable.</div>
+  <script src="/bio-page.js"></script>
+</body>
+</html>

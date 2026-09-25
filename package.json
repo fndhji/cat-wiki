@@ -1,0 +1,9 @@
+{
+  "name": "cat-wiki-bio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cat Wiki with owner-only Discord authenticated bio management",
+  "engines": {
+    "node": ">=20"
+  }
+}

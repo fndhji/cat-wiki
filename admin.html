@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#050505">
+  <title>Cat Bio Admin</title>
+  <link rel="icon" href="/favicon.svg">
+  <link rel="stylesheet" href="/bio-admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="admin-top">
+      <a href="/" class="admin-brand"><span>C</span><strong>Cat Bio</strong></a>
+      <div id="authArea"></div>
+    </header>
+
+    <section id="loginGate" class="login-gate">
+      <div class="gate-card">
+        <span class="eyebrow">PRIVATE CREATOR ACCESS</span>
+        <h1>Bio editor</h1>
+        <p>Editing access is checked server-side with Discord OAuth. Only the configured owner Discord ID is accepted.</p>
+        <a class="primary" href="/api/auth-start?purpose=owner">Continue with Discord</a>
+      </div>
+    </section>
+
+    <section id="editorApp" class="editor-layout" hidden>
+      <aside class="bio-list-panel">
+        <div class="aside-head"><div><span class="eyebrow">BIOS</span><strong>Profiles</strong></div><button id="newBio" class="icon-btn" type="button">+</button></div>
+        <div id="bioList" class="bio-list"></div>
+      </aside>
+
+      <form id="bioForm" class="editor-panel" autocomplete="off">
+        <div class="editor-heading">
+          <div><span class="eyebrow">EDITOR</span><h1 id="editorTitle">New bio</h1></div>
+          <div class="editor-actions"><a id="openBio" class="ghost" href="#" target="_blank" rel="noreferrer" hidden>Open</a><button class="primary" type="submit">Save</button></div>
+        </div>
+
+        <div id="notice" class="notice" hidden></div>
+
+        <section class="editor-section">
+          <h2>Profile</h2>
+          <div class="grid two">
+            <label>Slug<input name="slug" maxlength="32" placeholder="appareil" required></label>
+            <label class="check"><input name="published" type="checkbox"><span>Published</span></label>
+            <label>Display name<input name="displayName" maxlength="60" placeholder="Appareil"></label>
+            <label>Handle<input name="handle" maxlength="60" placeholder="appareil"></label>
+            <label class="wide">Headline<input name="headline" maxlength="120" placeholder="developer · collector"></label>
+            <label class="wide">Bio<textarea name="bio" maxlength="1200" rows="5" placeholder="Short description..."></textarea></label>
+            <label class="wide">Avatar URL / asset path<input name="avatarUrl" placeholder="/assets/bio-media/avatar.png"></label>
+            <label>Location label<input name="locationLabel" maxlength="80" placeholder="France"></label>
+            <label class="check"><input name="showDiscordPresence" type="checkbox" checked><span>Show Discord presence</span></label>
+          </div>
+        </section>
+
+        <section class="editor-section">
+          <h2>Background</h2>
+          <div class="grid two">
+            <label>Type<select name="backgroundType"><option value="none">None</option><option value="image">Image</option><option value="video">Video (.mp4 / .mov / .webm)</option></select></label>
+            <label>Background URL / asset path<input name="backgroundUrl" placeholder="/assets/bio-media/background.mp4"></label>
+            <label>Poster image<input name="backgroundPosterUrl" placeholder="/assets/bio-media/poster.jpg"></label>
+            <label>Overlay opacity<input name="overlayOpacity" type="number" min="0" max="0.9" step="0.05" value="0.38"></label>
+            <label>Background blur<input name="backgroundBlur" type="number" min="0" max="20" step="1" value="0"></label>
+          </div>
+          <p class="hint">Large media can be kept in <code>/assets/bio-media/</code> or on your own CDN. Browsers may not support every MOV codec, MP4/WebM is safer.</p>
+        </section>
+
+        <section class="editor-section">
+          <h2>Music / Spotify</h2>
+          <div class="grid two">
+            <label>Background music URL<input name="musicUrl" placeholder="/assets/bio-media/song.mp3"></label>
+            <label>Music title<input name="musicTitle" maxlength="80"></label>
+            <label>Artist<input name="musicArtist" maxlength="80"></label>
+            <label>Cover URL<input name="musicCoverUrl" placeholder="https://..."></label>
+            <label class="wide">Spotify URL<input name="spotifyUrl" placeholder="https://open.spotify.com/track/..."></label>
+            <label class="wide">Spotify title<input name="spotifyTitle" maxlength="140" placeholder="Fetched from Spotify or custom"></label>
+            <label class="wide">Spotify thumbnail<input name="spotifyThumbnail" placeholder="https://i.scdn.co/..."></label>
+          </div>
+          <button id="spotifyFetch" class="ghost inline" type="button">Fetch Spotify card</button>
+          <p class="hint">The Spotify card is visual only. Cat Bio does not auto-play Spotify.</p>
+        </section>
+
+        <section class="editor-section">
+          <h2>Badges & links</h2>
+          <label>Badges <span class="muted">one per line: label | icon URL</span><textarea name="badges" rows="5" placeholder="miam | /assets/bio-media/miam.png"></textarea></label>
+          <label>Links <span class="muted">one per line: label | https://...</span><textarea name="links" rows="5" placeholder="Discord | https://discord.gg/...\nWebsite | https://..."></textarea></label>
+        </section>
+
+        <section class="editor-section">
+          <h2>Discord link</h2>
+          <div id="discordLinkState" class="discord-link-state">Not linked.</div>
+          <div class="link-row"><button id="createDiscordLink" class="ghost" type="button">Create login link</button><input id="generatedLink" readonly placeholder="One-time link appears here"><button id="copyGeneratedLink" class="ghost" type="button">Copy</button></div>
+          <p class="hint">The person who opens the one-time link only verifies the Discord identity for this bio. They do not receive editor access.</p>
+        </section>
+
+        <section class="editor-section">
+          <h2>Views</h2>
+          <div class="views-row"><div><span>Organic</span><strong id="organicViews">0</strong></div><div><span>Manual offset</span><strong id="manualViewsPreview">0</strong></div><div><span>Total</span><strong id="totalViews">0</strong></div></div>
+          <input name="manualViews" type="number" value="0" hidden>
+          <div class="view-buttons"><button type="button" data-view-delta="1">+1</button><button type="button" data-view-delta="10">+10</button><button type="button" data-view-delta="100">+100</button><button type="button" data-view-delta="-1">-1</button><button type="button" data-view-delta="-10">-10</button></div>
+          <p class="hint">Normal views are deduplicated server-side for 24h using an HMAC fingerprint. Raw IP addresses are never stored.</p>
+        </section>
+
+        <div class="danger-row"><button id="deleteBio" class="danger" type="button">Delete bio</button></div>
+      </form>
+    </section>
+  </main>
+  <script src="/bio-admin.js"></script>
+</body>
+</html>
